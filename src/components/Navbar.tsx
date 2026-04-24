@@ -23,6 +23,7 @@ const Navbar = () => {
       href: "#",
       dropdown: [
         { name: "IELTS Predictor", href: "/tools/ielts-predictor", desc: "Estimate your band score" },
+        { name: "English Level Quiz", href: "/tools/business-english-quiz", desc: "Assess your professional rank" },
       ]
     },
     { name: "Projects", href: "/#projects" },
