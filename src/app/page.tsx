@@ -3,7 +3,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
-import IELTSPredictor from "@/components/IELTSPredictor";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 
@@ -38,7 +37,6 @@ export default function Home() {
       <Hero />
       <Stats />
       <Services />
-      <IELTSPredictor />
       <Projects />
       <Contact />
       

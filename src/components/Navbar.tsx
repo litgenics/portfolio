@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Menu, X, Rocket, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, Rocket, ArrowRight, ChevronDown } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showToolsDropdown, setShowToolsToolsDropdown] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -17,7 +18,13 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Services", href: "/#services" },
-    { name: "Tools", href: "/#tools" },
+    { 
+      name: "Tools", 
+      href: "#",
+      dropdown: [
+        { name: "IELTS Predictor", href: "/tools/ielts-predictor", desc: "Estimate your band score" },
+      ]
+    },
     { name: "Projects", href: "/#projects" },
     { name: "Blog", href: "/blog" },
   ];
@@ -38,16 +45,49 @@ const Navbar = () => {
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <Link 
+              <div 
                 key={link.name} 
-                href={link.href}
-                className="text-sm font-semibold hover:text-indigo-500 transition-colors"
+                className="relative group/item"
+                onMouseEnter={() => link.dropdown && setShowToolsToolsDropdown(true)}
+                onMouseLeave={() => link.dropdown && setShowToolsToolsDropdown(false)}
               >
-                {link.name}
-              </Link>
+                <Link 
+                  href={link.href}
+                  className="text-sm font-semibold hover:text-indigo-500 transition-colors flex items-center gap-1 py-2"
+                >
+                  {link.name}
+                  {link.dropdown && <ChevronDown size={14} className={`transition-transform duration-300 ${showToolsDropdown ? 'rotate-180' : ''}`} />}
+                </Link>
+
+                {link.dropdown && (
+                  <AnimatePresence>
+                    {showToolsDropdown && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className="absolute top-full left-0 w-64 pt-4"
+                      >
+                        <div className="glass rounded-2xl p-4 shadow-2xl border-white/20">
+                          {link.dropdown.map((sub) => (
+                            <Link 
+                              key={sub.name}
+                              href={sub.href}
+                              className="block p-3 rounded-xl hover:bg-indigo-500/10 transition-colors group/sub"
+                            >
+                              <p className="text-sm font-bold group-hover/sub:text-indigo-500">{sub.name}</p>
+                              <p className="text-xs text-slate-500 dark:text-slate-400">{sub.desc}</p>
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                )}
+              </div>
             ))}
             <Link 
-              href="#contact"
+              href="/#contact"
               className="bg-indigo-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-indigo-700 transition-all hover:shadow-lg hover:shadow-indigo-500/30"
             >
               Start Project
@@ -75,17 +115,34 @@ const Navbar = () => {
       >
         <div className="px-6 py-8 flex flex-col gap-6">
           {navLinks.map((link) => (
-            <Link 
-              key={link.name} 
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className="text-lg font-bold hover:text-indigo-500 transition-colors"
-            >
-              {link.name}
-            </Link>
+            <div key={link.name}>
+              {link.dropdown ? (
+                <div className="space-y-4">
+                  <p className="text-lg font-bold text-slate-400 uppercase tracking-widest text-xs">{link.name}</p>
+                  {link.dropdown.map((sub) => (
+                    <Link 
+                      key={sub.name}
+                      href={sub.href}
+                      onClick={() => setIsOpen(false)}
+                      className="block text-lg font-bold hover:text-indigo-500 transition-colors pl-4"
+                    >
+                      {sub.name}
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <Link 
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="text-lg font-bold hover:text-indigo-500 transition-colors"
+                >
+                  {link.name}
+                </Link>
+              )}
+            </div>
           ))}
           <Link 
-            href="#contact"
+            href="/#contact"
             onClick={() => setIsOpen(false)}
             className="bg-indigo-600 text-white px-6 py-4 rounded-2xl font-bold text-center shadow-xl shadow-indigo-500/20"
           >
