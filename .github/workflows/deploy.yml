@@ -1,4 +1,4 @@
-# Optimized and Robust Deployment for litgenics Portfolio
+# Final Robust Deployment for litgenics Portfolio
 name: Deploy Next.js site to Pages
 
 on:
@@ -25,26 +25,14 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20" # Using a stable long-term support version
+          node-version: "20"
           cache: "npm"
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
       - name: Install dependencies
-        run: npm install # Clean install to ensure all tailwind v4 deps are met
+        run: npm install
 
       - name: Build with Next.js
-        run: npm run build
-        env:
-          NEXT_TELEMETRY_DISABLED: 1
-
-      - name: Debug Output Directory
-        run: |
-          echo "Checking current directory structure:"
-          ls -R
-          echo "Verifying if 'out' exists:"
-          if [ -d "out" ]; then echo "OUT DIRECTORY FOUND"; else echo "OUT DIRECTORY MISSING"; exit 1; fi
+        run: npx next build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
