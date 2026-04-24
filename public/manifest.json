@@ -1,0 +1,16 @@
+{
+  "name": "M. Hamza Shaikh | litgenics",
+  "short_name": "litgenics",
+  "description": "Premium English Coaching & Software Solutions agency by M. Hamza Shaikh.",
+  "start_url": "/portfolio/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#6366f1",
+  "icons": [
+    {
+      "src": "/portfolio/images/profile.jfif",
+      "sizes": "192x192",
+      "type": "image/jfif"
+    }
+  ]
+}
