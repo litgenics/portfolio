@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
   FileUser, Download, Plus, Trash2, 
   Mail, Phone, MapPin, Briefcase, 
-  GraduationCap, Languages, Cpu, Info, Loader2
+  GraduationCap, Languages, Cpu, Info, Loader2, Printer
 } from "lucide-react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -31,39 +31,50 @@ const EuropassMaker = () => {
   const cvRef = useRef<HTMLDivElement>(null);
 
   const downloadPDF = async () => {
-    if (!cvRef.current) return;
+    const element = cvRef.current;
+    if (!element) return;
+    
     try {
       setIsExporting(true);
       
-      // Wait for images and fonts to load
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // Optimization: Force the element to be visible and at 1:1 scale for the capture
+      const originalStyle = element.style.cssText;
+      element.style.position = 'fixed';
+      element.style.left = '0';
+      element.style.top = '0';
+      element.style.zIndex = '-9999';
+      element.style.display = 'block';
+      element.style.transform = 'none';
 
-      const canvas = await html2canvas(cvRef.current, { 
+      const canvas = await html2canvas(element, {
         scale: 2,
         useCORS: true,
+        logging: false,
         allowTaint: true,
         backgroundColor: "#ffffff",
-        logging: false,
-        onclone: (clonedDoc) => {
-          // Ensure the element is visible in the clone for html2canvas
-          const el = clonedDoc.getElementById('cv-preview-container');
-          if (el) el.style.display = 'block';
-        }
+        windowWidth: 794, // A4 width in pixels at 96 DPI
       });
 
-      const imgData = canvas.toDataURL("image/png");
+      // Restore original styling
+      element.style.cssText = originalStyle;
+
+      const imgData = canvas.toDataURL("image/jpeg", 1.0);
       const pdf = new jsPDF("p", "mm", "a4");
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
       
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`Europass_CV_${data.firstName}_${data.lastName}.pdf`);
+      pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`CV_${data.firstName}_${data.lastName}.pdf`);
     } catch (error) {
-      console.error("PDF Export failed:", error);
-      alert("Failed to export PDF. Please try again or use a desktop browser.");
+      console.error("Capture Error:", error);
+      alert("Mobile Export issue detected. If it fails, please use the 'Print to PDF' option or a desktop browser.");
     } finally {
       setIsExporting(false);
     }
+  };
+
+  const handlePrint = () => {
+    window.print();
   };
 
   const addExp = () => setData({...data, experience: [...data.experience, { company: "", position: "", duration: "", desc: "" }]});
@@ -74,18 +85,24 @@ const EuropassMaker = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         
         {/* Editor Side */}
-        <div className="space-y-8 h-[85vh] overflow-y-auto pr-4 custom-scrollbar">
+        <div className="space-y-8 h-auto lg:h-[85vh] lg:overflow-y-auto lg:pr-4 custom-scrollbar">
+          <div className="bg-indigo-50 dark:bg-indigo-900/10 p-6 rounded-3xl mb-8 border border-indigo-100 dark:border-indigo-500/20">
+            <p className="text-sm font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-2">
+              <Info size={16} /> Tip: Use a desktop browser for the best high-resolution PDF export.
+            </p>
+          </div>
+
           <section className="glass rounded-3xl p-8 border-white/20">
             <h3 className="text-xl font-black mb-6 flex items-center gap-2 uppercase tracking-tighter">
               <FileUser className="text-indigo-500" /> Personal Identity
             </h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input placeholder="First Name" className="glass-input" value={data.firstName} onChange={(e) => setData({...data, firstName: e.target.value})} />
               <input placeholder="Last Name" className="glass-input" value={data.lastName} onChange={(e) => setData({...data, lastName: e.target.value})} />
-              <input placeholder="Email" className="glass-input col-span-2" value={data.email} onChange={(e) => setData({...data, email: e.target.value})} />
+              <input placeholder="Email" className="glass-input md:col-span-2" value={data.email} onChange={(e) => setData({...data, email: e.target.value})} />
               <input placeholder="Phone" className="glass-input" value={data.phone} onChange={(e) => setData({...data, phone: e.target.value})} />
               <input placeholder="Address" className="glass-input" value={data.address} onChange={(e) => setData({...data, address: e.target.value})} />
-              <textarea placeholder="Professional Summary" className="glass-input col-span-2 h-32" value={data.summary} onChange={(e) => setData({...data, summary: e.target.value})} />
+              <textarea placeholder="Professional Summary" className="glass-input md:col-span-2 h-32" value={data.summary} onChange={(e) => setData({...data, summary: e.target.value})} />
             </div>
           </section>
 
@@ -114,22 +131,30 @@ const EuropassMaker = () => {
             ))}
           </section>
 
-          <button 
-            onClick={downloadPDF}
-            disabled={isExporting}
-            className="w-full bg-indigo-600 text-white py-6 rounded-[2rem] font-black text-xl flex items-center justify-center gap-3 hover:bg-indigo-700 hover:shadow-2xl hover:shadow-indigo-500/40 transition-all sticky bottom-0 z-10 disabled:opacity-70"
-          >
-            {isExporting ? <Loader2 className="animate-spin" /> : <Download size={24} />}
-            {isExporting ? "Processing CV..." : "Export Professional PDF"}
-          </button>
+          <div className="flex flex-col sm:flex-row gap-4 sticky bottom-0 z-10 bg-slate-50 dark:bg-[#020617] py-4">
+            <button 
+              onClick={downloadPDF}
+              disabled={isExporting}
+              className="flex-1 bg-indigo-600 text-white py-6 rounded-[2rem] font-black text-xl flex items-center justify-center gap-3 hover:bg-indigo-700 hover:shadow-2xl hover:shadow-indigo-500/40 transition-all disabled:opacity-70"
+            >
+              {isExporting ? <Loader2 className="animate-spin" /> : <Download size={24} />}
+              {isExporting ? "Building PDF..." : "Direct Export"}
+            </button>
+            <button 
+              onClick={handlePrint}
+              className="px-8 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-[2rem] font-black flex items-center justify-center gap-2 hover:border-indigo-500 transition-all"
+            >
+              <Printer size={20} />
+              Print
+            </button>
+          </div>
         </div>
 
         {/* Preview Side */}
-        <div className="sticky top-32 scale-[0.6] md:scale-[0.8] lg:scale-[0.85] origin-top transform transition-all">
+        <div className="relative w-full overflow-x-auto lg:overflow-visible pb-20">
           <div 
             ref={cvRef}
-            id="cv-preview-container"
-            className="w-[210mm] min-h-[297mm] bg-white text-slate-900 p-[20mm] shadow-2xl mx-auto rounded-sm overflow-hidden"
+            className="w-[210mm] min-h-[297mm] bg-white text-slate-900 p-[20mm] shadow-2xl mx-auto rounded-sm origin-top transform scale-[0.45] sm:scale-[0.6] md:scale-[0.8] lg:scale-[1.0]"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             <div className="flex justify-between items-start border-b-2 border-indigo-600 pb-10 mb-10">
@@ -196,15 +221,21 @@ const EuropassMaker = () => {
         .glass-input {
           @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium transition-all text-slate-900 dark:text-white;
         }
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 4px;
+        @media print {
+          nav, button, .glass, .bg-indigo-50, footer { display: none !important; }
+          body { background: white !important; }
+          #cv-preview-container { 
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            transform: scale(1) !important;
+            box-shadow: none !important;
+            width: 100% !important;
+          }
         }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          @apply bg-transparent;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          @apply bg-indigo-500/20 rounded-full;
-        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { @apply bg-transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { @apply bg-indigo-500/20 rounded-full; }
       `}</style>
     </div>
   );
