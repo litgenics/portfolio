@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://litgenics.github.io/portfolio/sitemap.xml
