@@ -13,9 +13,30 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "M. Hamza Shaikh | litgenics - English Coach & Software Expert",
-  description: "Expert English coaching for professionals, IELTS/SAT prep, and complete software solutions. Based in Pakistan, serving the Gulf and global clients.",
-  keywords: ["English Coach", "Web Design", "SEO Expert", "litgenics", "IELTS prep Pakistan", "Software Solutions"],
+  metadataBase: new URL('https://litgenics.github.io/portfolio/'),
+  title: {
+    default: "M. Hamza Shaikh | litgenics - English Coach & Software Expert",
+    template: "%s | litgenics"
+  },
+  description: "Uplift your professional career with expert English coaching and high-end software solutions. Specializing in Business English, IELTS, SAT, Web Design, and SEO.",
+  keywords: ["M. Hamza Shaikh", "litgenics", "English Coach Pakistan", "Software Solutions Dubai", "SEO Expert Gulf", "IELTS Preparation Online", "SAT Coaching"],
+  openGraph: {
+    title: "M. Hamza Shaikh | litgenics - English Coach & Software Expert",
+    description: "Professional English coaching and complete software solutions for the global market.",
+    url: 'https://litgenics.github.io/portfolio/',
+    siteName: 'litgenics',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'M. Hamza Shaikh | litgenics',
+    description: 'Bridging the gap between Language and Technology.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  }
 };
 
 export default function RootLayout({

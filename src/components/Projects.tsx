@@ -9,28 +9,32 @@ const projects = [
     category: "Graphics Design",
     description: "Developed a comprehensive visual system for a leading tech firm in the Gulf region.",
     image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=1000&auto=format&fit=crop",
-    link: "#"
+    link: "#",
+    alt: "Corporate Brand Identity design showing modern minimalist logo and color palette"
   },
   {
     title: "SaaS Enterprise Dashboard",
     category: "Software Solution",
     description: "Built a high-performance dashboard with real-time analytics for a European SaaS client.",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
-    link: "#"
+    link: "#",
+    alt: "Complex data visualization dashboard with dark theme and real-time graphs"
   },
   {
     title: "E-Commerce Experience",
     category: "Web Design / SEO",
     description: "Designed and optimized a seamless shopping platform that saw a 40% increase in conversion.",
     image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1000&auto=format&fit=crop",
-    link: "#"
+    link: "#",
+    alt: "Modern mobile-responsive e-commerce website design with high-quality product photography"
   },
   {
     title: "Real Estate Portal",
     category: "Web Design",
     description: "A premium property portal designed for the Azerbaijan luxury real estate market.",
     image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1000&auto=format&fit=crop",
-    link: "#"
+    link: "#",
+    alt: "Luxury real estate website interface showcasing high-end properties and search filters"
   }
 ];
 
@@ -63,7 +67,7 @@ const Projects = () => {
               <div className="relative aspect-[16/10] rounded-[2.5rem] overflow-hidden mb-6 glass">
                 <img 
                   src={project.image} 
-                  alt={project.title}
+                  alt={project.alt}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-indigo-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-sm">
