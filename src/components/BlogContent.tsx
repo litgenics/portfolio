@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, Clock, Tag } from "lucide-react";
+import { ArrowLeft, Clock, Tag, Share2, Linkedin, Twitter, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -10,8 +10,10 @@ import { useEffect, useState } from "react";
 export default function BlogContent({ slug, content, data }: { slug: string, content: string, data: any }) {
   const [cleanContent, setCleanContent] = useState(content);
   const [scripts, setScripts] = useState<string[]>([]);
+  const [shareUrl, setShareUrl] = useState('');
 
   useEffect(() => {
+    setShareUrl(window.location.href);
     // Extract JSON-LD scripts from the content so they don't render as text
     const scriptRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/g;
     const extractedScripts: string[] = [];
@@ -43,12 +45,46 @@ export default function BlogContent({ slug, content, data }: { slug: string, con
         />
       ))}
 
-      <Link 
-        href="/blog"
-        className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-slate-500 hover:text-indigo-500 transition-colors mb-12"
-      >
-        <ArrowLeft size={16} /> Back to Blog
-      </Link>
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+        <Link 
+          href="/blog"
+          className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-slate-500 hover:text-indigo-500 transition-colors"
+        >
+          <ArrowLeft size={16} /> Back to Blog
+        </Link>
+
+        <div className="flex items-center gap-4">
+          <span className="text-xs font-black uppercase tracking-widest text-slate-400 flex items-center gap-2">
+            <Share2 size={14} /> Share Article:
+          </span>
+          <div className="flex gap-2">
+            <a 
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-all"
+            >
+              <Linkedin size={16} />
+            </a>
+            <a 
+              href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-sky-500 hover:text-white transition-all"
+            >
+              <Twitter size={16} />
+            </a>
+            <a 
+              href={`https://api.whatsapp.com/send?text=${encodeURIComponent(shareUrl)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-emerald-500 hover:text-white transition-all"
+            >
+              <MessageCircle size={16} />
+            </a>
+          </div>
+        </div>
+      </div>
 
       <article>
         <motion.div
