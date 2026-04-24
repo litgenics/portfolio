@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Link as LinkIcon, MessageSquare, Send, ArrowRight } from "lucide-react";
+import { Mail, Link as LinkIcon, MessageSquare, Send } from "lucide-react";
 
 const Contact = () => {
   return (
