@@ -3,67 +3,78 @@
 import { motion } from "framer-motion";
 import { 
   Code, Search, Palette, 
-  Video, GraduationCap, Mic2 
+  Video, GraduationCap, Mic2, ExternalLink
 } from "lucide-react";
 
 const services = [
   {
     title: "English Coaching",
-    description: "Professional & business English speaking skills to uplift your career.",
+    description: "Master professional & business English to accelerate your global career growth.",
     icon: <Mic2 className="text-orange-500" />,
-    color: "bg-orange-50",
-    darkColor: "dark:bg-orange-900/20"
-  },
-  {
-    title: "IELTS & SAT Prep",
-    description: "Expert guidance for competitive scores in IELTS and SAT exams.",
-    icon: <GraduationCap className="text-blue-500" />,
-    color: "bg-blue-50",
-    darkColor: "dark:bg-blue-900/20"
+    className: "md:col-span-2 md:row-span-2",
+    gradient: "from-orange-500/10 to-transparent"
   },
   {
     title: "Software Solutions",
-    description: "Complete software development using any modern tech stack.",
+    description: "Bespoke full-stack development using cutting-edge technology.",
     icon: <Code className="text-indigo-500" />,
-    color: "bg-indigo-50",
-    darkColor: "dark:bg-indigo-900/20"
+    className: "md:col-span-2",
+    gradient: "from-indigo-500/10 to-transparent"
+  },
+  {
+    title: "IELTS & SAT",
+    description: "Targeted strategies for academic excellence.",
+    icon: <GraduationCap className="text-blue-500" />,
+    className: "md:col-span-1",
+    gradient: "from-blue-500/10 to-transparent"
   },
   {
     title: "Web Design",
-    description: "Beautiful, responsive, and user-centric website designs.",
+    description: "Premium UI/UX design that converts visitors into customers.",
     icon: <Palette className="text-pink-500" />,
-    color: "bg-pink-50",
-    darkColor: "dark:bg-pink-900/20"
+    className: "md:col-span-1",
+    gradient: "from-pink-500/10 to-transparent"
   },
   {
     title: "SEO Expert",
-    description: "Optimize your online presence and rank higher on search engines.",
+    description: "Data-driven strategies to dominate search results.",
     icon: <Search className="text-green-500" />,
-    color: "bg-green-50",
-    darkColor: "dark:bg-green-900/20"
+    className: "md:col-span-1",
+    gradient: "from-green-500/10 to-transparent"
   },
   {
     title: "Video Editing",
-    description: "Professional video editing and post-production for all platforms.",
+    description: "Cinematic storytelling for your brand.",
     icon: <Video className="text-red-500" />,
-    color: "bg-red-50",
-    darkColor: "dark:bg-red-900/20"
+    className: "md:col-span-1",
+    gradient: "from-red-500/10 to-transparent"
   },
 ];
 
 const Services = () => {
   return (
-    <section id="services" className="py-24 px-4 bg-gray-50 dark:bg-slate-900/50">
+    <section id="services" className="py-32 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">How I Can Help You</h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            From mastering a new language to building the next big app, I provide 
-            comprehensive solutions tailored to your needs.
-          </p>
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+          <div className="max-w-2xl">
+            <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+              EXPERT <span className="text-gradient">CAPABILITIES</span>
+            </h2>
+            <p className="text-slate-600 dark:text-slate-400 text-lg font-medium">
+              We combine linguistic precision with technical excellence to deliver 
+              solutions that stand out in the digital landscape.
+            </p>
+          </div>
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            className="bg-white dark:bg-slate-900 px-6 py-3 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center gap-3 cursor-pointer"
+          >
+            <span className="font-bold">View Portfolio</span>
+            <ExternalLink size={18} />
+          </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[180px]">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
@@ -71,16 +82,19 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ y: -5 }}
-              className={`p-8 rounded-3xl ${service.color} ${service.darkColor} border border-transparent hover:border-indigo-500/30 transition-all`}
+              className={`group relative glass rounded-[2.5rem] p-8 overflow-hidden flex flex-col justify-end ${service.className}`}
             >
-              <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center mb-6 shadow-sm">
-                {service.icon}
+              <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+              
+              <div className="relative z-10">
+                <div className="w-14 h-14 glass rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform duration-500">
+                  {service.icon}
+                </div>
+                <h3 className="text-2xl font-black mb-3 tracking-tight">{service.title}</h3>
+                <p className="text-slate-600 dark:text-slate-400 font-medium leading-snug">
+                  {service.description}
+                </p>
               </div>
-              <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                {service.description}
-              </p>
             </motion.div>
           ))}
         </div>
