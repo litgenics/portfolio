@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, Clock, Tag, Share2, Linkedin, Twitter, MessageCircle } from "lucide-react";
+import { ArrowLeft, Clock, Tag, Share2, Globe, Send, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -64,7 +64,7 @@ export default function BlogContent({ slug, content, data }: { slug: string, con
               rel="noopener noreferrer"
               className="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-all"
             >
-              <Linkedin size={16} />
+              <Globe size={16} />
             </a>
             <a 
               href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}`}
@@ -72,7 +72,7 @@ export default function BlogContent({ slug, content, data }: { slug: string, con
               rel="noopener noreferrer"
               className="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-sky-500 hover:text-white transition-all"
             >
-              <Twitter size={16} />
+              <Send size={16} />
             </a>
             <a 
               href={`https://api.whatsapp.com/send?text=${encodeURIComponent(shareUrl)}`}
