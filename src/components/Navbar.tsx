@@ -24,6 +24,7 @@ const Navbar = () => {
       dropdown: [
         { name: "IELTS Predictor", href: "/tools/ielts-predictor", desc: "Estimate your band score" },
         { name: "English Level Quiz", href: "/tools/business-english-quiz", desc: "Assess your professional rank" },
+        { name: "AI Librarian", href: "/tools/ai-librarian", desc: "Book suggestions for your mood" },
       ]
     },
     { name: "Projects", href: "/#projects" },
