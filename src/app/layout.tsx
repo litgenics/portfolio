@@ -44,11 +44,35 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "M. Hamza Shaikh",
+    "url": "https://litgenics.github.io/portfolio/",
+    "jobTitle": "English Coach & Software Expert",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "litgenics"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/in/litgenics",
+      "https://github.com/litgenics",
+      "https://twitter.com/litgenics"
+    ],
+    "description": "Professional English coach and software developer helping professionals uplift their careers through language and technology."
+  };
+
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

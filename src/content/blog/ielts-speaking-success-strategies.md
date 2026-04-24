@@ -31,9 +31,9 @@ The IELTS Speaking test is often the most feared part of the exam. Many students
 
 ## Understanding the IELTS Speaking Test Format Clearly
 
-Before you start practicing, you must know what to expect. The Speaking test lasts between 11 and 14 minutes. It is a face-to-face interview with an examiner. The test has three parts. Each part tests a different set of skills.
+Before you start practicing, you must know what to expect. The Speaking test lasts between 11 and 14 minutes. It is a face-to-face interview with an examiner. The test has three parts. Each part tests a different set of skills. You can find the official test structure on the [British Council IELTS website](https://www.britishcouncil.org/).
 
-Part 1 is about you. The examiner asks simple questions about your home, job, or hobbies. Part 2 is the "Cue Card" task. You get a topic and have one minute to prepare. Then, you talk for two minutes. Part 3 is a deeper discussion. You talk about more abstract topics related to Part 2. Knowing this format helps you stay calm. It is also called "al-itafaq al-shakli" in Arabic: الاتفاق الشكلي.
+Part 1 is about you. The examiner asks simple questions about your home, job, or hobbies. Part 2 is the "Cue Card" task. You get a topic and have one minute to prepare. Then, you talk for two minutes. Part 3 is a deeper discussion. You talk about more abstract topics related to Part 2. Knowing this format helps you stay calm. For more practice materials, check the [IDP IELTS official site](https://www.ieltsidpindia.com/). It is also called "al-itafaq al-shakli" in Arabic: الاتفاق الشكلي.
 
 ## Proven Tips to Boost Your Speaking Confidence Instantly
 
