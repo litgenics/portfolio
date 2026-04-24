@@ -3,8 +3,10 @@
 import { motion } from "framer-motion";
 import { ArrowLeft, Clock, Tag } from "lucide-react";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
-export default function BlogContent({ slug }: { slug: string }) {
+export default function BlogContent({ slug, content, data }: { slug: string, content: string, data: any }) {
   return (
     <div className="max-w-4xl mx-auto px-4">
       <Link 
@@ -20,25 +22,25 @@ export default function BlogContent({ slug }: { slug: string }) {
           animate={{ opacity: 1, y: 0 }}
         >
           <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-indigo-500 mb-6">
-            <span className="flex items-center gap-1"><Tag size={12} /> Category</span>
+            <span className="flex items-center gap-1"><Tag size={12} /> {data.tags?.[0] || 'Agency'}</span>
             <span className="w-1 h-1 bg-slate-300 rounded-full" />
             <span className="flex items-center gap-1"><Clock size={12} /> 10 min read</span>
           </div>
           
           <h1 className="text-4xl md:text-6xl font-black mb-8 leading-tight tracking-tighter uppercase">
-            {slug.split('-').join(' ')}
+            {data.title || slug.split('-').join(' ')}
           </h1>
 
-          <div className="prose prose-lg dark:prose-invert max-w-none font-medium text-slate-700 dark:text-slate-300">
-            <p className="text-xl italic border-l-4 border-indigo-500 pl-6 my-10 bg-indigo-50/50 dark:bg-indigo-900/10 py-6 rounded-r-2xl">
-              This article is being optimized for your viewing. Please check back in a moment as we finalize the SEO generation for this topic.
-            </p>
-            
-            <p>
-              In the meantime, know that at <strong>litgenics</strong>, we specialize in delivering high-impact solutions 
-              across both language and technology sectors. Whether you are in Pakistan, the Gulf, or anywhere globally, 
-              our goal is to uplift your professional presence.
-            </p>
+          <div className="prose prose-lg dark:prose-invert max-w-none font-medium text-slate-700 dark:text-slate-300
+            prose-headings:text-slate-900 dark:prose-headings:text-white prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tighter
+            prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
+            prose-p:leading-relaxed prose-p:mb-6
+            prose-a:text-indigo-600 dark:prose-a:text-indigo-400 prose-a:font-bold prose-a:no-underline hover:prose-a:underline
+            prose-strong:text-slate-900 dark:prose-strong:text-white prose-strong:font-black
+            prose-ul:list-disc prose-ul:pl-6 prose-li:mb-2">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {content}
+            </ReactMarkdown>
           </div>
         </motion.div>
       </article>
