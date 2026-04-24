@@ -3,6 +3,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
+import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 
 const Stats = () => {
@@ -36,6 +37,7 @@ export default function Home() {
       <Hero />
       <Stats />
       <Services />
+      <Projects />
       <Contact />
       
       <footer className="py-20 border-t border-slate-200 dark:border-slate-800">
