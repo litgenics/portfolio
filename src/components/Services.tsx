@@ -3,115 +3,130 @@
 import { motion } from "framer-motion";
 import { 
   Code, Search, Palette, 
-  Video, GraduationCap, Mic2, ExternalLink
+  Video, GraduationCap, Mic2, ArrowUpRight 
 } from "lucide-react";
 
 const services = [
   {
+    id: "01",
     title: "English Coaching",
-    description: "Master professional & business English to accelerate your global career growth with personalized coaching sessions.",
-    icon: <Mic2 className="text-orange-500" />,
-    className: "md:col-span-2 md:row-span-2",
-    gradient: "from-orange-500/20 via-orange-500/5 to-transparent"
+    description: "Professional & Business English mastery for global executives and students looking to uplift their careers.",
+    icon: <Mic2 size={24} />,
+    color: "from-orange-500 to-amber-500"
   },
   {
+    id: "02",
     title: "Software Solutions",
-    description: "Bespoke full-stack development and complete software lifecycle management using modern tech stacks.",
-    icon: <Code className="text-indigo-500" />,
-    className: "md:col-span-2 md:row-span-2",
-    gradient: "from-indigo-500/20 via-indigo-500/5 to-transparent"
+    description: "End-to-end full-stack development. We build scalable, high-performance software using any modern tech stack.",
+    icon: <Code size={24} />,
+    color: "from-indigo-500 to-purple-500"
   },
   {
-    title: "IELTS & SAT",
-    description: "Targeted strategies and intensive prep for academic excellence in global standardized tests.",
-    icon: <GraduationCap className="text-blue-500" />,
-    className: "md:col-span-1 md:row-span-1",
-    gradient: "from-blue-500/20 via-blue-500/5 to-transparent"
+    id: "03",
+    title: "IELTS & SAT Prep",
+    description: "Intensive training programs designed to achieve top-tier scores in international standardized examinations.",
+    icon: <GraduationCap size={24} />,
+    color: "from-blue-500 to-cyan-500"
   },
   {
+    id: "04",
     title: "Web Design",
-    description: "Premium UI/UX design focused on high-conversion user experiences.",
-    icon: <Palette className="text-pink-500" />,
-    className: "md:col-span-1 md:row-span-1",
-    gradient: "from-pink-500/20 via-pink-500/5 to-transparent"
+    description: "Bespoke UI/UX design that combines aesthetic beauty with high-conversion user experience principles.",
+    icon: <Palette size={24} />,
+    color: "from-pink-500 to-rose-500"
   },
   {
+    id: "05",
     title: "SEO Expert",
-    description: "Advanced data-driven strategies to dominate global search results.",
-    icon: <Search className="text-green-500" />,
-    className: "md:col-span-1 md:row-span-1",
-    gradient: "from-green-500/20 via-green-500/5 to-transparent"
+    description: "Dominate search rankings with data-driven optimization strategies tailored for the 2026 digital landscape.",
+    icon: <Search size={24} />,
+    color: "from-emerald-500 to-teal-500"
   },
   {
+    id: "06",
     title: "Video Editing",
-    description: "Professional cinematic storytelling and post-production.",
-    icon: <Video className="text-red-500" />,
-    className: "md:col-span-1 md:row-span-1",
-    gradient: "from-red-500/20 via-red-500/5 to-transparent"
-  },
+    description: "Cinematic post-production and storytelling for brands looking to capture attention on modern social platforms.",
+    icon: <Video size={24} />,
+    color: "from-red-500 to-orange-500"
+  }
 ];
 
 const Services = () => {
   return (
-    <section id="services" className="py-32 px-4 relative overflow-hidden bg-white dark:bg-[#020617]">
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-          <div className="max-w-2xl">
-            <motion.h2 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="text-5xl md:text-7xl font-black mb-8 tracking-tighter uppercase leading-[0.85]"
-            >
-              EXPERT <br />
-              <span className="text-gradient">CAPABILITIES</span>
-            </motion.h2>
-            <p className="text-slate-600 dark:text-slate-400 text-xl font-medium leading-relaxed">
-              Precision in language. Excellence in technology. We bridge the gap 
-              to deliver digital solutions that command attention.
-            </p>
-          </div>
-          <motion.div 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-slate-50 dark:bg-slate-900 px-8 py-4 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center gap-3 cursor-pointer shadow-xl shadow-indigo-500/5"
+    <section id="services" className="py-32 px-4 relative bg-white dark:bg-[#020617] border-t border-slate-100 dark:border-slate-900">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-24">
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-indigo-600 font-black tracking-[0.3em] uppercase text-sm mb-4"
           >
-            <span className="font-bold uppercase tracking-widest text-sm">Full Portfolio</span>
-            <ExternalLink size={18} className="text-indigo-500" />
-          </motion.div>
+            Services & Expertise
+          </motion.p>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-tight"
+          >
+            EXPERT <span className="text-gradient">CAPABILITIES</span>
+          </motion.h2>
         </div>
 
-        {/* Perfectly Balanced 4-Column Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[240px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-l border-t border-slate-100 dark:border-slate-800/50">
           {services.map((service, index) => (
             <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              key={service.id}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ y: -8 }}
-              className={`group relative glass rounded-[3.5rem] p-10 overflow-hidden flex flex-col justify-end transition-all duration-500 hover:shadow-[0_20px_50px_rgba(99,102,241,0.15)] border-white/40 dark:border-slate-800/60 ${service.className}`}
+              className="group relative p-12 border-r border-b border-slate-100 dark:border-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-900/40 transition-colors duration-500"
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
-              
-              <div className="relative z-10">
-                <div className="w-14 h-14 glass rounded-2xl flex items-center justify-center mb-8 shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 bg-white/80 dark:bg-slate-800/80">
+              {/* Service Number */}
+              <span className="absolute top-8 right-12 text-sm font-black text-slate-200 dark:text-slate-800 group-hover:text-indigo-500/20 transition-colors">
+                {service.id}
+              </span>
+
+              {/* Icon with Dynamic Gradient Background */}
+              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.color} p-[1px] mb-8 group-hover:scale-110 transition-transform duration-500`}>
+                <div className="w-full h-full bg-white dark:bg-slate-950 rounded-[15px] flex items-center justify-center text-slate-900 dark:text-white">
                   {service.icon}
                 </div>
-                <h3 className="text-3xl font-black mb-3 tracking-tighter uppercase leading-none">{service.title}</h3>
-                <p className="text-slate-600 dark:text-slate-400 font-bold text-[13px] uppercase tracking-wider leading-relaxed opacity-70 group-hover:opacity-100 transition-opacity">
-                  {service.description}
-                </p>
+              </div>
+
+              <h3 className="text-2xl font-black mb-4 tracking-tight uppercase group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                {service.title}
+              </h3>
+              
+              <p className="text-slate-600 dark:text-slate-400 font-medium leading-relaxed mb-8">
+                {service.description}
+              </p>
+
+              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-indigo-500 opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
+                Learn More <ArrowUpRight size={14} />
               </div>
             </motion.div>
           ))}
         </div>
+
+        {/* Bottom CTA for Services */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="mt-20 flex flex-col items-center"
+        >
+          <div className="h-px w-20 bg-slate-200 dark:bg-slate-800 mb-12" />
+          <p className="text-slate-500 font-bold uppercase tracking-widest text-sm text-center mb-8">
+            Need a custom solution for your business?
+          </p>
+          <a 
+            href="#contact" 
+            className="bg-indigo-600 text-white px-10 py-5 rounded-2xl font-black text-lg transition-all hover:scale-105 hover:shadow-2xl hover:shadow-indigo-500/40"
+          >
+            Start a Conversation
+          </a>
+        </motion.div>
       </div>
-      
-      {/* Dynamic Background Elements */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-[120px] -z-10" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[120px] -z-10" />
     </section>
   );
 };
