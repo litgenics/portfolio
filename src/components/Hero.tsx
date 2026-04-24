@@ -35,7 +35,7 @@ const Hero = () => {
           transition={{ delay: 0.4 }}
           className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10"
         >
-          Hi, I'm <span className="font-bold text-gray-900 dark:text-white text-2xl">M.Hamza Shaikh</span>. 
+          Hi, I&apos;m <span className="font-bold text-gray-900 dark:text-white text-2xl">M.Hamza Shaikh</span>. 
           I uplift professionals with business English and deliver complete software solutions through 
           <span className="text-indigo-600 font-bold ml-1">litgenics</span>.
         </motion.p>

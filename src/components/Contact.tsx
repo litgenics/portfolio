@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Link as LinkIcon, MessageSquare, Send } from "lucide-react";
+import { Mail, Link as LinkIcon, MessageSquare } from "lucide-react";
 
 const Contact = () => {
   return (
@@ -15,7 +15,7 @@ const Contact = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to work together?</h2>
           <p className="text-indigo-100 text-lg mb-10 max-w-2xl mx-auto">
             Whether you want to improve your English or build a custom software solution, 
-            I'm here to help you achieve your goals. Let's start a conversation!
+            I&apos;m here to help you achieve your goals. Let&apos;s start a conversation!
           </p>
 
           <div className="flex flex-wrap justify-center gap-6 mb-12">

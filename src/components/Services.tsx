@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import { 
-  Languages, Code, Search, Palette, 
-  Video, Laptop, GraduationCap, Mic2 
+  Code, Search, Palette, 
+  Video, GraduationCap, Mic2 
 } from "lucide-react";
 
 const services = [
