@@ -5,10 +5,44 @@ import { ArrowLeft, Clock, Tag } from "lucide-react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { useEffect, useState } from "react";
 
 export default function BlogContent({ slug, content, data }: { slug: string, content: string, data: any }) {
+  const [cleanContent, setCleanContent] = useState(content);
+  const [scripts, setScripts] = useState<string[]>([]);
+
+  useEffect(() => {
+    // Extract JSON-LD scripts from the content so they don't render as text
+    const scriptRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/g;
+    const extractedScripts: string[] = [];
+    let match;
+    let tempContent = content;
+
+    while ((match = scriptRegex.exec(content)) !== null) {
+      extractedScripts.push(match[1]);
+    }
+
+    // Remove the script tags from the visible markdown
+    tempContent = content.replace(scriptRegex, "");
+    
+    // Also remove any internal SEO labels that might have been left behind
+    tempContent = tempContent.replace(/\*\*Claim:\*\*|\*\*Evidence:\*\*|\*\*Interpretation:\*\*|\*\*Direct Answer:\*\*|The Evidence Sandwich:/gi, "");
+
+    setCleanContent(tempContent);
+    setScripts(extractedScripts);
+  }, [content]);
+
   return (
     <div className="max-w-4xl mx-auto px-4">
+      {/* Inject scripts into the DOM head for SEO without showing them to users */}
+      {scripts.map((js, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: js }}
+        />
+      ))}
+
       <Link 
         href="/blog"
         className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-slate-500 hover:text-indigo-500 transition-colors mb-12"
@@ -39,7 +73,7 @@ export default function BlogContent({ slug, content, data }: { slug: string, con
             prose-strong:text-slate-900 dark:prose-strong:text-white prose-strong:font-black
             prose-ul:list-disc prose-ul:pl-6 prose-li:mb-2">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
-              {content}
+              {cleanContent}
             </ReactMarkdown>
           </div>
         </motion.div>
