@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
   FileUser, Download, Plus, Trash2, 
   Mail, Phone, MapPin, Briefcase, 
-  GraduationCap, Languages, Cpu, Info, Loader2, Printer
+  GraduationCap, Languages, Cpu, Info, Loader2, Printer, ArrowRight
 } from "lucide-react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
