@@ -14,7 +14,7 @@ const WhatsAppWidget = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const whatsappNumber = "+923000000000"; // Replace with your actual WhatsApp number
+  const whatsappNumber = "923120295549"; // Your verified WhatsApp number
   const message = encodeURIComponent("Hi Hamza! I'm interested in your English Coaching / Software services. Can we talk?");
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
 
