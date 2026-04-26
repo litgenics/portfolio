@@ -30,6 +30,7 @@ const Navbar = () => {
         { name: "Europass CV Maker", href: "/tools/europass-cv-maker", desc: "Professional European resumes" },
       ]
     },
+    { name: "Pricing", href: "/#pricing" },
     { name: "Projects", href: "/#projects" },
     { name: "Blog", href: "/blog" },
   ];

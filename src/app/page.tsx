@@ -3,8 +3,11 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
+import Pricing from "@/components/Pricing";
+import SuccessStories from "@/components/SuccessStories";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
+import WhatsAppWidget from "@/components/WhatsAppWidget";
 
 const Stats = () => {
   const stats = [
@@ -37,8 +40,11 @@ export default function Home() {
       <Hero />
       <Stats />
       <Services />
+      <Pricing />
+      <SuccessStories />
       <Projects />
       <Contact />
+      <WhatsAppWidget />
       
       <footer className="py-20 border-t border-slate-200 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
