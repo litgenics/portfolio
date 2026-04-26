@@ -133,6 +133,25 @@ const AILibrarian = () => {
                   Try Another Mood
                 </button>
               </div>
+
+              {/* Tool-to-Sale Pipeline: Literary Coaching */}
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-16 p-8 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-[2.5rem] border border-indigo-100 dark:border-indigo-500/20"
+              >
+                <h4 className="text-xl font-black mb-2 uppercase tracking-tight">Master the language of this book</h4>
+                <p className="text-sm text-slate-500 dark:text-slate-400 font-medium mb-6">
+                  Reading is 10x more effective when you discuss it. Book a 1-on-1 session to analyze this 
+                  book&apos;s vocabulary and improve your professional fluency.
+                </p>
+                <a 
+                  href={`https://wa.me/923120295549?text=I%20want%20to%20discuss%20the%20book%20${encodeURIComponent(recommendation.title)}%20in%20a%201-on-1%20session.`}
+                  className="text-indigo-600 dark:text-indigo-400 font-black text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:gap-4 transition-all"
+                >
+                  Book 1-on-1 Session <ArrowRight size={14} />
+                </a>
+              </motion.div>
               
               <p className="mt-12 text-xs font-bold uppercase tracking-widest text-slate-400 opacity-60">
                 LITGENICS LITERARY RECOMMENDATION ENGINE v1.0

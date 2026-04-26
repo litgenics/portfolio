@@ -148,6 +148,25 @@ const EuropassMaker = () => {
               Print
             </button>
           </div>
+
+          {/* Tool-to-Sale Pipeline: CV Content Review */}
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="p-8 glass rounded-[2.5rem] border-indigo-500/20 bg-indigo-500/5 mt-8 text-center"
+          >
+            <h4 className="text-xl font-black mb-3 uppercase tracking-tight">Is your content professional?</h4>
+            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium mb-6">
+              Your layout is perfect, but weak English can cost you the job. 
+              Get a **Professional Content Review** by M. Hamza Shaikh for just **$49**.
+            </p>
+            <a 
+              href="https://wa.me/923120295549?text=I%20just%20built%20my%20CV%20and%20need%20a%20Professional%20Content%20Review."
+              className="inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-indigo-700 transition-all"
+            >
+              Get Content Review <ArrowRight size={14} />
+            </a>
+          </motion.div>
         </div>
 
         {/* Preview Side */}

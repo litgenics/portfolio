@@ -86,36 +86,57 @@ const BrandNameSuggester = () => {
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            className="space-y-12"
           >
-            {results.map((name, i) => (
-              <motion.div
-                key={name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05 }}
-                className="glass rounded-3xl p-8 flex flex-col items-center justify-center group hover:bg-indigo-500/5 transition-all border-white/20"
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {results.map((name, i) => (
+                <motion.div
+                  key={name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  className="glass rounded-3xl p-8 flex flex-col items-center justify-center group hover:bg-indigo-500/5 transition-all border-white/20"
+                >
+                  <h3 className="text-2xl font-black mb-6 tracking-tight group-hover:scale-110 transition-transform">{name}</h3>
+                  <div className="flex gap-3">
+                    <button 
+                      onClick={() => copyToClipboard(name)}
+                      className="p-3 glass rounded-xl hover:bg-white dark:hover:bg-slate-800 transition-all text-slate-500 hover:text-indigo-500"
+                      title="Copy Name"
+                    >
+                      {copied === name ? <Check size={18} className="text-emerald-500" /> : <Copy size={18} />}
+                    </button>
+                    <a 
+                      href={`https://www.godaddy.com/en-pk/domain-search?domainToCheck=${name}.com`}
+                      target="_blank"
+                      className="p-3 glass rounded-xl hover:bg-white dark:hover:bg-slate-800 transition-all text-slate-500 hover:text-indigo-500"
+                      title="Check .com Availability"
+                    >
+                      <Globe size={18} />
+                    </a>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Tool-to-Sale Pipeline: MVP Build */}
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-10 glass rounded-[3rem] border-indigo-500/20 bg-indigo-600 text-white text-center shadow-2xl shadow-indigo-500/20"
+            >
+              <h4 className="text-3xl font-black mb-4 uppercase tracking-tighter">Got the perfect name?</h4>
+              <p className="text-indigo-100 font-medium mb-8 max-w-xl mx-auto">
+                Now build the perfect platform. Let **litgenics** turn your brand name into a high-performance 
+                MVP using the latest tech stacks.
+              </p>
+              <a 
+                href="https://wa.me/923120295549?text=I%20have%20a%20brand%20name%20and%20want%20to%20get%20a%20quote%20for%20a%20custom%20MVP."
+                className="inline-flex items-center gap-2 bg-white text-indigo-600 px-10 py-4 rounded-2xl font-black text-lg hover:bg-indigo-50 transition-all"
               >
-                <h3 className="text-2xl font-black mb-6 tracking-tight group-hover:scale-110 transition-transform">{name}</h3>
-                <div className="flex gap-3">
-                  <button 
-                    onClick={() => copyToClipboard(name)}
-                    className="p-3 glass rounded-xl hover:bg-white dark:hover:bg-slate-800 transition-all text-slate-500 hover:text-indigo-500"
-                    title="Copy Name"
-                  >
-                    {copied === name ? <Check size={18} className="text-emerald-500" /> : <Copy size={18} />}
-                  </button>
-                  <a 
-                    href={`https://www.godaddy.com/en-pk/domain-search?domainToCheck=${name}.com`}
-                    target="_blank"
-                    className="p-3 glass rounded-xl hover:bg-white dark:hover:bg-slate-800 transition-all text-slate-500 hover:text-indigo-500"
-                    title="Check .com Availability"
-                  >
-                    <Globe size={18} />
-                  </a>
-                </div>
-              </motion.div>
-            ))}
+                Get Custom MVP Quote <ArrowRight size={20} />
+              </a>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

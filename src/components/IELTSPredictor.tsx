@@ -131,6 +131,26 @@ const IELTSPredictor = () => {
                 <Info size={14} /> Based on official IELTS rounding
               </p>
             </div>
+
+            {/* Sales Bridge: Next Step */}
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-8 p-6 bg-indigo-50 dark:bg-indigo-900/10 rounded-2xl border border-indigo-100 dark:border-indigo-500/20 text-center"
+            >
+              <p className="text-sm font-bold text-indigo-600 dark:text-indigo-400 mb-4">
+                {overall < 7.5 
+                  ? `You are ${(7.5 - overall).toFixed(1)} points away from a top-tier score.` 
+                  : "Excellent potential! Now let's secure your admission."}
+              </p>
+              <a 
+                href={overall < 7.5 ? "https://wa.me/923120295549?text=I%20got%20a%20predicted%20score%20of%20" + overall.toFixed(1) + "%20and%20need%20an%20Intensive%20Gap%20Analysis." : "https://wa.me/923120295549?text=I%20got%20a%20" + overall.toFixed(1) + "%20score!%20I%20need%20a%20University%20Strategy%20session."}
+                className="inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest hover:bg-indigo-700 transition-all"
+              >
+                {overall < 7.5 ? "Book Intensive Gap Analysis" : "Get Strategy Session"}
+                <ArrowRight size={16} />
+              </a>
+            </motion.div>
           </motion.div>
         </div>
       </div>

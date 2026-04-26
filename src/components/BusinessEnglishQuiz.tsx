@@ -163,9 +163,9 @@ const BusinessEnglishQuiz = () => {
 
             <div className="bg-slate-50 dark:bg-slate-900/50 rounded-3xl p-8 mb-10 border border-slate-100 dark:border-slate-800">
               <h4 className="text-lg font-black mb-4 flex items-center justify-center gap-2">
-                <Mail className="text-indigo-500" size={20} /> Get Your Improvement Plan
+                <Mail className="text-indigo-500" size={20} /> Master Executive English
               </h4>
-              <p className="text-sm text-slate-500 mb-6 font-medium">Enter your email and I'll send you a custom roadmap to reach Executive Level.</p>
+              <p className="text-sm text-slate-500 mb-6 font-medium">Your current level is a great start. Enter your email to get a **Custom Improvement Roadmap** and book a **Free 15-min Strategy Call** with Hamza.</p>
               <form action="https://formspree.io/f/xldgqezw" method="POST" className="flex flex-col sm:flex-row gap-3">
                 <input type="hidden" name="_subject" value={`Business English Quiz Result: ${getLevel().title}`} />
                 <input type="hidden" name="score" value={`${score}/10`} />
@@ -176,7 +176,7 @@ const BusinessEnglishQuiz = () => {
                   placeholder="your@email.com" 
                   className="flex-1 px-6 py-4 rounded-xl glass focus:outline-none focus:ring-2 focus:ring-indigo-500 font-bold"
                 />
-                <button type="submit" className="bg-indigo-600 text-white px-8 py-4 rounded-xl font-black hover:bg-indigo-700 transition-all">Send Plan</button>
+                <button type="submit" className="bg-indigo-600 text-white px-8 py-4 rounded-xl font-black hover:bg-indigo-700 transition-all">Get Roadmap & Call</button>
               </form>
             </div>
 
