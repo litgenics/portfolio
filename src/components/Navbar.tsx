@@ -24,6 +24,7 @@ const Navbar = () => {
       dropdown: [
         { name: "IELTS Predictor", href: "/tools/ielts-predictor", desc: "Estimate your band score" },
         { name: "English Level Quiz", href: "/tools/business-english-quiz", desc: "Assess your professional rank" },
+        { name: "AI Fluency Audit", href: "/tools/ai-fluency-audit", desc: "Voice analysis & tone report" },
         { name: "AI Librarian", href: "/tools/ai-librarian", desc: "Book suggestions for your mood" },
         { name: "Brand Suggester", href: "/tools/brand-name-suggester", desc: "Modern names for your startup" },
         { name: "University Finder", href: "/tools/university-finder", desc: "Match institutions with your goals" },
