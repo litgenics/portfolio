@@ -16,23 +16,35 @@ const AILibrarian = () => {
     
     setTimeout(() => {
       const input = feeling.toLowerCase();
-      let bestMatch = null;
-      let highestScore = -1;
+      let matches: any[] = [];
+      let maxScore = 0;
 
-      // Scan all 100 books for the best sentiment match
+      // 🧠 Smart Scoring Engine
       bookDatabase.forEach(book => {
         let currentScore = 0;
         book.moods.forEach(mood => {
-          if (input.includes(mood.toLowerCase())) currentScore += 1;
+          if (input.includes(mood.toLowerCase())) {
+            currentScore += 1;
+            // Bonus points for exact matches vs partial includes
+            if (input === mood.toLowerCase()) currentScore += 2;
+          }
         });
         
-        if (currentScore > highestScore) {
-          highestScore = currentScore;
-          bestMatch = book;
+        if (currentScore > maxScore) {
+          maxScore = currentScore;
+          matches = [book]; // Found a new leader
+        } else if (currentScore === maxScore && currentScore > 0) {
+          matches.push(book); // It's a tie
         }
       });
 
-      setRecommendation(bestMatch || bookDatabase[Math.floor(Math.random() * bookDatabase.length)]);
+      // 🎲 Randomized Tie-Breaker Logic
+      // If no matches, pick random from entire DB. If ties, pick random from ties.
+      const finalResult = matches.length > 0 
+        ? matches[Math.floor(Math.random() * matches.length)] 
+        : bookDatabase[Math.floor(Math.random() * bookDatabase.length)];
+
+      setRecommendation(finalResult);
       setStatus('result');
     }, 3500);
   };
