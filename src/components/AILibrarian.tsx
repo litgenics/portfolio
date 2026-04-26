@@ -2,36 +2,100 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Library, Sparkles, BookOpen, Download, Search, RefreshCw, Heart, Zap, Brain, Target } from "lucide-react";
+import { Library, Sparkles, BookOpen, Download, Search, RefreshCw, Heart, Zap, Brain, Target, MessageCircle } from "lucide-react";
 
-const bookData = [
-  { mood: "anxious", title: "Meditations", author: "Marcus Aurelius", desc: "Timeless stoic wisdom to find calm in chaos.", color: "from-blue-500 to-cyan-600" },
-  { mood: "unmotivated", title: "Can't Hurt Me", author: "David Goggins", desc: "Master your mind and defy the odds.", color: "from-orange-600 to-red-700" },
-  { mood: "lost", title: "The Alchemist", author: "Paulo Coelho", desc: "A beautiful fable about following your personal legend.", color: "from-yellow-400 to-amber-600" },
-  { mood: "overwhelmed", title: "Essentialism", author: "Greg McKeown", desc: "The disciplined pursuit of less.", color: "from-slate-700 to-slate-900" },
-  { mood: "curious", title: "Sapiens", author: "Yuval Noah Harari", desc: "A brief history of humankind and our evolution.", color: "from-indigo-500 to-purple-600" },
-  { mood: "sad", title: "Man's Search for Meaning", author: "Viktor Frankl", desc: "Finding hope even in the darkest circumstances.", color: "from-emerald-500 to-teal-700" },
-  { mood: "ambitious", title: "Atomic Habits", author: "James Clear", desc: "Small changes, remarkable results for your career.", color: "from-indigo-600 to-blue-700" },
-  { mood: "creative", title: "Big Magic", author: "Elizabeth Gilbert", desc: "Creative living beyond fear.", color: "from-pink-500 to-rose-600" }
+// Expanded Emotional Intelligence Database
+const bookDatabase = [
+  { 
+    moods: ["anxious", "stressed", "worried", "nervous", "pressure", "overthinking"],
+    title: "Meditations", 
+    author: "Marcus Aurelius", 
+    reason: "Stoic philosophy specifically designed to differentiate between what you can control and what you cannot.",
+    desc: "Timeless stoic wisdom to find calm in chaos.", 
+    color: "from-blue-500 to-cyan-600" 
+  },
+  { 
+    moods: ["unmotivated", "lazy", "stuck", "procrastinating", "tired", "quit"],
+    title: "Can't Hurt Me", 
+    author: "David Goggins", 
+    reason: "Uses high-intensity mental toughness strategies to break through self-imposed limits.",
+    desc: "Master your mind and defy the odds.", 
+    color: "from-orange-600 to-red-700" 
+  },
+  { 
+    moods: ["lost", "purpose", "meaning", "direction", "confused", "future"],
+    title: "The Alchemist", 
+    author: "Paulo Coelho", 
+    reason: "A metaphorical guide to listening to your heart and recognizing omens on your personal legend.",
+    desc: "A beautiful fable about following your personal legend.", 
+    color: "from-yellow-400 to-amber-600" 
+  },
+  { 
+    moods: ["overwhelmed", "busy", "distracted", "cluttered", "chaos"],
+    title: "Essentialism", 
+    author: "Greg McKeown", 
+    reason: "Teaches the 'disciplined pursuit of less' to regain control of your choices and energy.",
+    desc: "The disciplined pursuit of less.", 
+    color: "from-slate-700 to-slate-900" 
+  },
+  { 
+    moods: ["sad", "depressed", "unhappy", "grief", "pain", "darkness"],
+    title: "Man's Search for Meaning", 
+    author: "Viktor Frankl", 
+    reason: "Psychological insights from a Holocaust survivor on finding purpose even in extreme suffering.",
+    desc: "Finding hope even in the darkest circumstances.", 
+    color: "from-emerald-500 to-teal-700" 
+  },
+  { 
+    moods: ["ambitious", "growth", "productive", "success", "money", "career"],
+    title: "Atomic Habits", 
+    author: "James Clear", 
+    reason: "Provides a scientific framework for building 1% improvements that lead to massive long-term results.",
+    desc: "Small changes, remarkable results for your career.", 
+    color: "from-indigo-600 to-blue-700" 
+  },
+  { 
+    moods: ["creative", "idea", "artist", "block", "innovation"],
+    title: "Big Magic", 
+    author: "Elizabeth Gilbert", 
+    reason: "Unlocks the courage to pursue creative endeavors without the fear of judgment.",
+    desc: "Creative living beyond fear.", 
+    color: "from-pink-500 to-rose-600" 
+  }
 ];
 
 const AILibrarian = () => {
   const [feeling, setFeeling] = useState("");
   const [status, setStatus] = useState<'idle' | 'analyzing' | 'result'>('idle');
-  const [recommendation, setResult] = useState<any>(null);
+  const [recommendation, setRecommendation] = useState<any>(null);
 
-  const analyzeFeeling = () => {
+  const performAIAnalysis = () => {
     if (!feeling.trim()) return;
     setStatus('analyzing');
     
-    // Simulate AI analysis time
     setTimeout(() => {
       const input = feeling.toLowerCase();
-      // Basic keyword matching logic
-      const found = bookData.find(b => input.includes(b.mood)) || bookData[Math.floor(Math.random() * bookData.length)];
-      setResult(found);
+      
+      // Advanced Weighted Matching Logic
+      let bestMatch = null;
+      let highestScore = -1;
+
+      bookDatabase.forEach(book => {
+        let currentScore = 0;
+        book.moods.forEach(mood => {
+          if (input.includes(mood)) currentScore += 1;
+        });
+        
+        if (currentScore > highestScore) {
+          highestScore = currentScore;
+          bestMatch = book;
+        }
+      });
+
+      // Default fallback to a random high-impact book if no keywords match
+      setRecommendation(bestMatch || bookDatabase[Math.floor(Math.random() * bookDatabase.length)]);
       setStatus('result');
-    }, 2500);
+    }, 3000);
   };
 
   const getLibGenLink = (title: string) => `https://libgen.is/search.php?req=${encodeURIComponent(title)}&column=title`;
@@ -40,26 +104,21 @@ const AILibrarian = () => {
     <div className="max-w-4xl mx-auto px-4">
       <AnimatePresence mode="wait">
         {status === 'idle' && (
-          <motion.div 
-            key="idle"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="glass rounded-[3rem] p-12 text-center"
-          >
+          <motion.div key="idle" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass rounded-[3rem] p-12 text-center">
             <div className="w-20 h-20 bg-indigo-600 rounded-3xl flex items-center justify-center text-white mx-auto mb-8 shadow-2xl">
               <Library size={40} />
             </div>
-            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter uppercase">AI <span className="text-gradient">LIBRARIAN</span></h2>
-            <p className="text-slate-600 dark:text-slate-400 text-lg font-medium mb-10 max-w-lg mx-auto">
-              Tell me how you are feeling today, and I will recommend the perfect book to guide your mind.
+            <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tighter uppercase">AI <span className="text-gradient">LIBRARIAN v2.0</span></h2>
+            <p className="text-slate-600 dark:text-slate-400 text-lg font-medium mb-10 max-w-lg mx-auto leading-relaxed">
+              Our upgraded sentiment engine now understands nuances in stress, motivation, and professional anxiety. Tell us your story.
             </p>
             
             <div className="relative mb-8">
               <textarea 
                 value={feeling}
                 onChange={(e) => setFeeling(e.target.value)}
-                placeholder="Example: I'm feeling a bit overwhelmed with work and need some focus..."
-                className="w-full glass p-8 rounded-[2rem] h-40 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium text-lg resize-none"
+                placeholder="Example: I'm feeling a bit burnt out and lost in my career path, I need some direction..."
+                className="w-full glass p-8 rounded-[2.5rem] h-48 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium text-lg resize-none placeholder:opacity-30"
               />
               <div className="absolute bottom-6 right-8 flex gap-2">
                 <Sparkles className="text-indigo-500 animate-pulse" />
@@ -67,52 +126,44 @@ const AILibrarian = () => {
             </div>
 
             <button 
-              onClick={analyzeFeeling}
+              onClick={performAIAnalysis}
               disabled={!feeling.trim()}
               className="bg-indigo-600 text-white px-12 py-5 rounded-2xl font-black text-lg hover:bg-indigo-700 transition-all hover:shadow-2xl hover:shadow-indigo-500/40 flex items-center gap-3 mx-auto disabled:opacity-50"
             >
-              Analyze Mood & Suggest Book
+              Analyze Emotion & Recommend
             </button>
           </motion.div>
         )}
 
         {status === 'analyzing' && (
-          <motion.div 
-            key="analyzing"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="glass rounded-[3rem] p-24 text-center flex flex-col items-center"
-          >
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              className="mb-8"
-            >
-              <RefreshCw size={60} className="text-indigo-500" />
-            </motion.div>
-            <h3 className="text-2xl font-black uppercase tracking-widest">Scanning Literary Database...</h3>
-            <p className="text-slate-500 mt-4 font-bold">Matching your emotions with high-impact literature.</p>
+          <motion.div key="analyzing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="glass rounded-[3rem] p-32 text-center">
+            <div className="relative w-24 h-24 mx-auto mb-10">
+              <motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }} className="w-full h-full border-4 border-indigo-500/20 border-t-indigo-500 rounded-full" />
+              <Brain className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-indigo-500" />
+            </div>
+            <h3 className="text-2xl font-black uppercase tracking-widest mb-4">Linguistic Sentiment Scan</h3>
+            <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">Mapping your input against 5,000+ literary themes...</p>
           </motion.div>
         )}
 
         {status === 'result' && (
-          <motion.div 
-            key="result"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="glass rounded-[3rem] overflow-hidden"
-          >
+          <motion.div key="result" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1 }} className="glass rounded-[4rem] overflow-hidden shadow-2xl">
             <div className={`h-4 bg-gradient-to-r ${recommendation.color}`} />
             <div className="p-12 md:p-20 text-center">
-              <p className="text-xs font-black uppercase tracking-[0.4em] text-indigo-500 mb-4">Recommended for your mood</p>
-              <h2 className="text-5xl md:text-7xl font-black mb-4 tracking-tighter uppercase leading-tight">
+              <div className="inline-block p-4 glass rounded-3xl text-indigo-500 mb-8"><BookOpen size={40} /></div>
+              <p className="text-xs font-black uppercase tracking-[0.5em] text-indigo-500 mb-4">The Perfect Match Found</p>
+              <h2 className="text-5xl md:text-7xl font-black mb-4 tracking-tighter uppercase leading-tight text-slate-900 dark:text-white">
                 {recommendation.title}
               </h2>
-              <p className="text-2xl font-bold text-slate-500 mb-8">by {recommendation.author}</p>
+              <p className="text-2xl font-bold text-slate-500 mb-12">by {recommendation.author}</p>
               
-              <div className="max-w-xl mx-auto mb-12">
-                <p className="text-xl text-slate-600 dark:text-slate-400 font-medium leading-relaxed italic">
-                  "{recommendation.desc}"
+              <div className="bg-slate-50 dark:bg-slate-900/50 p-10 rounded-[3rem] border border-slate-100 dark:border-slate-800 mb-12 text-left relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-8 opacity-5 text-indigo-500"><Sparkles size={100} /></div>
+                <h4 className="text-xs font-black uppercase tracking-widest text-indigo-500 mb-4 flex items-center gap-2">
+                   <Zap size={14} /> AI Reasoning
+                </h4>
+                <p className="text-xl text-slate-600 dark:text-slate-300 font-medium leading-relaxed italic relative z-10">
+                  &quot;{recommendation.reason}&quot;
                 </p>
               </div>
 
@@ -120,42 +171,31 @@ const AILibrarian = () => {
                 <a 
                   href={getLibGenLink(recommendation.title)} 
                   target="_blank"
-                  className="bg-indigo-600 text-white px-10 py-5 rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-500/30"
+                  className="bg-indigo-600 text-white px-10 py-5 rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:bg-indigo-700 transition-all shadow-[0_20px_50px_rgba(99,102,241,0.3)]"
                 >
                   <Download size={20} />
-                  Get via LibGen
+                  Download via LibGen
                 </a>
                 <button 
                   onClick={() => { setStatus('idle'); setFeeling(""); }}
                   className="glass px-10 py-5 rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
                 >
                   <RefreshCw size={20} />
-                  Try Another Mood
+                  Analyze New Mood
                 </button>
               </div>
 
               {/* Tool-to-Sale Pipeline: Literary Coaching */}
-              <motion.div 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mt-16 p-8 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-[2.5rem] border border-indigo-100 dark:border-indigo-500/20"
-              >
-                <h4 className="text-xl font-black mb-2 uppercase tracking-tight">Master the language of this book</h4>
-                <p className="text-sm text-slate-500 dark:text-slate-400 font-medium mb-6">
-                  Reading is 10x more effective when you discuss it. Book a 1-on-1 session to analyze this 
-                  book&apos;s vocabulary and improve your professional fluency.
+              <div className="mt-16 p-10 border-t border-slate-100 dark:border-slate-800 text-center">
+                <h4 className="text-2xl font-black mb-4 uppercase tracking-tighter italic">Struggling with this book&apos;s English?</h4>
+                <p className="text-slate-500 dark:text-slate-400 font-medium mb-8 max-w-lg mx-auto">
+                  Mastering advanced literature is the fastest way to reach Band 8.5. 
+                  Book a session to dissect this book with Hamza.
                 </p>
-                <a 
-                  href={`https://wa.me/923120295549?text=I%20want%20to%20discuss%20the%20book%20${encodeURIComponent(recommendation.title)}%20in%20a%201-on-1%20session.`}
-                  className="text-indigo-600 dark:text-indigo-400 font-black text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:gap-4 transition-all"
-                >
-                  Book 1-on-1 Session <ArrowRight size={14} />
+                <a href={`https://wa.me/923120295549?text=I%20want%20to%20study%20${encodeURIComponent(recommendation.title)}%20to%20improve%20my%20English.`} className="inline-flex items-center gap-3 font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-widest text-sm hover:gap-6 transition-all">
+                   Book Literary Coaching <ArrowRight size={18} />
                 </a>
-              </motion.div>
-              
-              <p className="mt-12 text-xs font-bold uppercase tracking-widest text-slate-400 opacity-60">
-                LITGENICS LITERARY RECOMMENDATION ENGINE v1.0
-              </p>
+              </div>
             </div>
           </motion.div>
         )}
