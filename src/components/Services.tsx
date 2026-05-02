@@ -53,7 +53,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="py-32 px-4 relative bg-white dark:bg-[#020617] border-t border-slate-100 dark:border-slate-900">
+    <section id="services" className="py-32 px-4 relative bg-background border-t border-border">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-24">
           <motion.p 
@@ -72,7 +72,7 @@ const Services = () => {
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-l border-t border-slate-100 dark:border-slate-800/50">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-l border-t border-border/50">
           {services.map((service, index) => (
             <motion.div
               key={service.id}
@@ -80,7 +80,7 @@ const Services = () => {
               whileInView={{ opacity: 1 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group relative p-12 border-r border-b border-slate-100 dark:border-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-900/40 transition-colors duration-500"
+              className="group relative p-12 border-r border-b border-border/50 hover:bg-slate-500/5 transition-colors duration-500"
             >
               {/* Service Number */}
               <span className="absolute top-8 right-12 text-sm font-black text-slate-200 dark:text-slate-800 group-hover:text-indigo-500/20 transition-colors">
@@ -89,7 +89,7 @@ const Services = () => {
 
               {/* Icon with Dynamic Gradient Background */}
               <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.color} p-[1px] mb-8 group-hover:scale-110 transition-transform duration-500`}>
-                <div className="w-full h-full bg-white dark:bg-slate-950 rounded-[15px] flex items-center justify-center text-slate-900 dark:text-white">
+                <div className="w-full h-full bg-background rounded-[15px] flex items-center justify-center text-foreground">
                   {service.icon}
                 </div>
               </div>

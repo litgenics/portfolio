@@ -32,7 +32,7 @@ const stories = [
 
 const SuccessStories = () => {
   return (
-    <section id="stories" className="py-32 px-4 bg-slate-50 dark:bg-slate-900/40">
+    <section id="stories" className="py-32 px-4 bg-background border-y border-border">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-24">
           <motion.p 
@@ -59,7 +59,7 @@ const SuccessStories = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="glass rounded-[3rem] p-10 flex flex-col relative group hover:bg-white dark:hover:bg-slate-900 transition-all duration-500"
+              className="glass rounded-[3rem] p-10 flex flex-col relative group hover:bg-slate-500/5 transition-all duration-500 border border-border"
             >
               <Quote className="absolute top-10 right-10 text-indigo-500/10 group-hover:text-indigo-500/20 transition-colors" size={60} />
               
@@ -71,7 +71,7 @@ const SuccessStories = () => {
                 &quot;{story.content}&quot;
               </p>
 
-              <div className="flex items-center gap-4 pt-8 border-t border-slate-100 dark:border-slate-800">
+              <div className="flex items-center gap-4 pt-8 border-t border-border">
                 <div className="w-12 h-12 glass rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                   {story.icon}
                 </div>

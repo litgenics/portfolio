@@ -63,7 +63,7 @@ const Pricing = () => {
   const [activeTab, setActiveTab] = useState<'english' | 'software'>('english');
 
   return (
-    <section id="pricing" className="py-32 px-4 relative overflow-hidden bg-white dark:bg-[#020617]">
+    <section id="pricing" className="py-32 px-4 relative overflow-hidden bg-background">
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-20">
           <motion.p 
@@ -82,7 +82,7 @@ const Pricing = () => {
           </motion.h2>
 
           {/* Premium Toggle */}
-          <div className="inline-flex p-2 glass rounded-3xl mb-16 border-white/20">
+          <div className="inline-flex p-2 glass rounded-3xl mb-16 border-border">
             <button 
               onClick={() => setActiveTab('english')}
               className={`px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest transition-all ${activeTab === 'english' ? 'bg-indigo-600 text-white shadow-xl shadow-indigo-500/20' : 'text-slate-500 hover:text-indigo-500'}`}
@@ -107,7 +107,7 @@ const Pricing = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ delay: index * 0.1 }}
-                className={`relative glass rounded-[3rem] p-10 flex flex-col ${plan.highlight ? 'border-indigo-500 shadow-2xl shadow-indigo-500/10 z-10 scale-105' : 'border-white/20'}`}
+                className={`relative glass rounded-[3rem] p-10 flex flex-col ${plan.highlight ? 'border-indigo-500 shadow-2xl shadow-indigo-500/10 z-10 scale-105' : 'border-border'}`}
               >
                 {plan.highlight && (
                   <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-indigo-600 text-white px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest flex items-center gap-2">
@@ -137,7 +137,7 @@ const Pricing = () => {
                   ))}
                 </div>
 
-                <button className={`w-full py-5 rounded-2xl font-black text-lg flex items-center justify-center gap-3 transition-all ${plan.highlight ? 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-xl shadow-indigo-500/20' : 'bg-slate-100 dark:bg-slate-800 hover:bg-indigo-600 hover:text-white'}`}>
+                <button className={`w-full py-5 rounded-2xl font-black text-lg flex items-center justify-center gap-3 transition-all ${plan.highlight ? 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-xl shadow-indigo-500/20' : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-indigo-600 hover:text-white'}`}>
                   Get Started
                   <ArrowRight size={20} />
                 </button>

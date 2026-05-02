@@ -5,7 +5,7 @@ import { Mail, Link as LinkIcon, MessageSquare, Send } from "lucide-react";
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-32 px-4 relative overflow-hidden">
+    <section id="contact" className="py-32 px-4 relative overflow-hidden bg-background">
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>

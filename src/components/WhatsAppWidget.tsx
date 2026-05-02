@@ -26,11 +26,11 @@ const WhatsAppWidget = () => {
             initial={{ opacity: 0, y: 20, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className="bg-white dark:bg-slate-900 shadow-2xl rounded-2xl p-4 mb-4 border border-slate-100 dark:border-slate-800 max-w-[240px] relative"
+            className="bg-background shadow-2xl rounded-2xl p-4 mb-4 border border-border max-w-[240px] relative"
           >
             <button 
               onClick={() => setShowNotification(false)}
-              className="absolute -top-2 -right-2 bg-slate-200 dark:bg-slate-800 rounded-full p-1 hover:scale-110 transition-transform"
+              className="absolute -top-2 -right-2 bg-slate-200 dark:bg-slate-800 rounded-full p-1 hover:scale-110 transition-transform text-foreground"
             >
               <X size={12} />
             </button>
@@ -63,7 +63,7 @@ const WhatsAppWidget = () => {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="absolute bottom-20 right-0 w-[320px] glass rounded-[2.5rem] overflow-hidden shadow-2xl border-white/20"
+            className="absolute bottom-20 right-0 w-[320px] glass rounded-[2.5rem] overflow-hidden shadow-2xl border-border"
           >
             <div className="bg-emerald-500 p-6 text-white">
               <div className="flex items-center gap-4">
@@ -81,8 +81,8 @@ const WhatsAppWidget = () => {
             </div>
             
             <div className="p-6 space-y-4">
-              <div className="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
-                <p className="text-sm font-medium text-slate-600 dark:text-slate-300">
+              <div className="bg-background/50 p-4 rounded-2xl border border-border">
+                <p className="text-sm font-medium text-foreground">
                   Hello! 👋 <br/>
                   I&apos;m here to help you with English coaching or custom software solutions. What&apos;s on your mind?
                 </p>

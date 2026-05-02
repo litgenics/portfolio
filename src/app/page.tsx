@@ -18,12 +18,12 @@ const Stats = () => {
   ];
 
   return (
-    <section className="py-20 border-y border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
+    <section className="py-20 border-y border-border bg-background/50 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
           {stats.map((stat) => (
             <div key={stat.label}>
-              <p className="text-4xl md:text-5xl font-black mb-2 tracking-tighter">{stat.value}</p>
+              <p className="text-4xl md:text-5xl font-black mb-2 tracking-tighter text-foreground">{stat.value}</p>
               <p className="text-sm font-bold uppercase tracking-widest text-slate-500">{stat.label}</p>
             </div>
           ))}
@@ -35,7 +35,7 @@ const Stats = () => {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-slate-50 selection:bg-indigo-500 selection:text-white">
+    <main className="min-h-screen bg-background text-foreground selection:bg-indigo-500 selection:text-white">
       <Navbar />
       <Hero />
       <Stats />

@@ -15,9 +15,9 @@ const projects = [
   {
     title: "SaaS Enterprise Dashboard",
     category: "Software Solution",
-    description: "Built a high-performance dashboard with real-time analytics for a European SaaS client.",
+    description: "A high-performance command center with real-time analytics, user management, and automated billing workflows.",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
-    link: "#",
+    link: "/portfolio/projects/saas-dashboard",
     alt: "Complex data visualization dashboard with dark theme and real-time graphs"
   },
   {
@@ -31,16 +31,16 @@ const projects = [
   {
     title: "Real Estate Portal",
     category: "Web Design",
-    description: "A premium property portal designed for the Azerbaijan luxury real estate market.",
+    description: "A premium property portal designed for the luxury real estate market with advanced listing management.",
     image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1000&auto=format&fit=crop",
-    link: "#",
+    link: "/portfolio/projects/real-estate-portal",
     alt: "Luxury real estate website interface showcasing high-end properties and search filters"
   }
 ];
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-32 px-4 bg-slate-50 dark:bg-[#020617]">
+    <section id="projects" className="py-32 px-4 bg-background">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div className="max-w-2xl">
@@ -56,13 +56,16 @@ const Projects = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {projects.map((project, index) => (
-            <motion.div
+            <motion.a
               key={project.title}
+              href={project.link}
+              target={project.link.startsWith('http') ? "_blank" : undefined}
+              rel={project.link.startsWith('http') ? "noopener noreferrer" : undefined}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group cursor-pointer"
+              className="group cursor-pointer block"
             >
               <div className="relative aspect-[16/10] rounded-[2.5rem] overflow-hidden mb-6 glass">
                 <img 
@@ -84,7 +87,7 @@ const Projects = () => {
                   <p className="text-slate-600 dark:text-slate-400 font-medium">{project.description}</p>
                 </div>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>

@@ -5,7 +5,7 @@ import { Sparkles, ArrowRight, Play } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-32 pb-20 px-4 overflow-hidden bg-slate-50 dark:bg-[#020617]">
+    <section className="relative min-h-screen flex items-center justify-center pt-32 pb-20 px-4 overflow-hidden bg-background">
       {/* Dynamic Background Blobs */}
       <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-300 dark:bg-purple-900/20 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-xl opacity-70 animate-blob"></div>
       <div className="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 dark:bg-yellow-900/20 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
@@ -20,7 +20,7 @@ const Hero = () => {
           className="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-10"
         >
           <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-[2.5rem] rotate-6 blur-md opacity-20 group-hover:rotate-12 transition-transform" />
-          <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden border-2 border-white dark:border-slate-800 shadow-2xl">
+          <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden border-2 border-border shadow-2xl">
             <img 
               src="/portfolio/images/profile.jfif" 
               alt="M. Hamza Shaikh"
